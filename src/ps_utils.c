@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/21 03:44:35 by sshakya          ###   ########.fr       */
+/*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
+/*   Updated: 2021/05/21 04:41:07 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <unistd.h>
-# include <stdint.h>
-# include "libft/inc/libft.h"
-# include <stdio.h>
-
-typedef struct s_pswap
+void	ps_clear(t_pswap *list)
 {
-	int				i;
-	int				n;
-	struct s_pswap	*head;
-	struct s_pswap	*tail;
-	struct s_pswap	*next;
-	struct s_pswap	*prev;
-}					t_pswap;
+	t_pswap *temp;
 
-/*
-** UTIL FUNCTIONS
-*/
-int		ps_error(t_pswap *list);
-void	ps_clear(t_pswap *list);
+	if (list == NULL)
+		return ;
+	while (list != NULL)
+	{
+		temp = list;
+		free(list);
+		list = temp->next;
+	}
+}
 
-#endif
+int	ps_error(t_pswap *list)
+{
+	ps_clear(list);
+	write(1, "Error\n", 6);
+	return (1);
+}

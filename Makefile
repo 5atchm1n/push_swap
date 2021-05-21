@@ -2,14 +2,17 @@ NAME = push_swap
 
 INC = push_swap.h
 
-SRCS = push_swap.c
+SRCS = push_swap.c \
+	   ps_utils.c
+
+LIBFT = inc/libft/libft.a
 
 SRCDIR = src
 OBJDIR = objs
 INCDIR = inc
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 MEM = -fsanitize=address
 
 OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
@@ -22,11 +25,13 @@ libft:
 	make -s -Cinc/libft
 
 $(NAME): libft ${OBJS} 
-	${CC} ${CFLAGS} -I./inc ${OBJS} -o ${NAME}
+	${CC} ${CFLAGS} ${MEM} ${OBJS} ${LIBFT} -o ${NAME}
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	mkdir -p ${@D}
 	${CC} ${CFLAGS} -I./inc -c $< -o $@
+
+re: fclean all
 
 norm:
 	norminette ${NORM}
