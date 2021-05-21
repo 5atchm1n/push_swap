@@ -3,7 +3,8 @@ NAME = push_swap
 INC = push_swap.h
 
 SRCS = push_swap.c \
-	   ps_utils.c
+	   ps_utils.c \
+	   ps_moves.c
 
 LIBFT = inc/libft/libft.a
 
@@ -13,7 +14,7 @@ INCDIR = inc
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
-MEM = -fsanitize=address
+#MEM = -fsanitize=address
 
 OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
 NORM = $(addprefix ${SRCDIR}/,${SRCS})

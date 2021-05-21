@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ps_moves.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/21 17:30:31 by sshakya          ###   ########.fr       */
+/*   Created: 2021/05/21 17:04:26 by sshakya           #+#    #+#             */
+/*   Updated: 2021/05/21 18:03:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <unistd.h>
-# include <stdint.h>
-# include "libft/inc/libft.h"
-# include <stdio.h>
-
-typedef struct s_pswap
+void ps_swap(t_pswap *list)
 {
-	int				i;
-	int				n;
-	struct s_pswap	*head;
-	struct s_pswap	*tail;
-	struct s_pswap	*next;
-	struct s_pswap	*prev;
-}					t_pswap;
+	t_pswap *temp;
 
-/*
-** UTIL FUNCTIONS
-*/
-int		ps_error(t_pswap *list);
-void	ps_clear(t_pswap *list);
-void	ps_swap(t_pswap *list);
-
-#endif
+	list = list->head;
+	if (list->next != NULL)
+	{
+		temp = list;
+		list = temp->next;
+		list->next = temp;
+		list->head = list;
+		list->next->prev = list;
+	}
+	temp = list->head;
+	while (list != NULL && i < 5)
+	{
+		list->head = temp;
+		list = list->next;
+		i++;
+	}
+}
