@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:04:26 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/21 18:03:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/24 02:37:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,12 @@
 
 void ps_swap(t_pswap *list)
 {
-	t_pswap *temp;
+	int	n;
 
-	list = list->head;
+	n = list->n;
 	if (list->next != NULL)
 	{
-		temp = list;
-		list = temp->next;
-		list->next = temp;
-		list->head = list;
-		list->next->prev = list;
-	}
-	temp = list->head;
-	while (list != NULL && i < 5)
-	{
-		list->head = temp;
-		list = list->next;
-		i++;
+		list->n = list->next->n;
+		list->next->n = n;
 	}
 }

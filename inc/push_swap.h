@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/21 17:30:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/24 02:41:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 typedef struct s_pswap
 {
-	int				i;
 	int				n;
 	struct s_pswap	*head;
 	struct s_pswap	*tail;
@@ -34,5 +33,6 @@ typedef struct s_pswap
 int		ps_error(t_pswap *list);
 void	ps_clear(t_pswap *list);
 void	ps_swap(t_pswap *list);
+void	my_print(t_pswap *list, int args);
 
 #endif
