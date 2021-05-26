@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/24 02:38:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/26 04:39:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,17 @@ int	ps_error(t_pswap *list)
 	return (1);
 }
 
-void	my_print(t_pswap *list, int args)
+void	my_print(t_pswap *list)
 {
-	for (int i = 1; i < args; i++)
+	t_pswap	*head;
+
+	head = list->head;
+	while (list != NULL)
 	{
 		printf("%3d\t", list->n);
-		printf("%10p  %10p\t %10p\n", list->next, list->prev, list->head);
+		printf("next = %10p\t prev = %10p\t", list->next, list->prev);
+		printf("list = %10p\t %10p\n", list, list->tail);
 		list = list->next;
 	}
+	list = head;
 }
