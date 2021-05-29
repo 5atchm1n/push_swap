@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/26 04:39:05 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/29 10:47:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ int	ps_error(t_pswap *list)
 void	my_print(t_pswap *list)
 {
 	t_pswap	*head;
+	int		index;
 
 	head = list->head;
+	index = 0;
 	while (list != NULL)
 	{
-		printf("%3d\t", list->n);
-		printf("next = %10p\t prev = %10p\t", list->next, list->prev);
-		printf("list = %10p\t %10p\n", list, list->tail);
+		printf("|%3d|", list->n);
+		printf("N = %14p | P = %14p | ", list->next, list->prev);
+		printf("L = %14p | T = %14p | H = %14p\n", list, list->tail, list->head);
 		list = list->next;
+		index++;
 	}
 	list = head;
 }

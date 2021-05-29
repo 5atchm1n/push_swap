@@ -32,7 +32,7 @@ libft:
 
 $(NAME): libft ${OBJS} 
 	@echo -n "Compiling push_swap"
-	${CC} ${CFLAGS} ${OBJS} -o $@ ${LIBFT}
+	${CC} ${CFLAGS} ${MEM} ${OBJS} -o $@ ${LIBFT}
 	@echo "\033[32m\t\t[OK]\033[0m"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

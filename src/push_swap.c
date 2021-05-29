@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/26 05:00:40 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/29 11:49:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	main(int argc, char **argv)
 		return (0);
 	// SET STACK A
 	stack_a = ps_init_stack_a(argc, argv);
-	my_print(stack_a);
 	printf("stack_a = %p\n", stack_a);
+	my_print(stack_a);
+	/*
 	// TEST SWAP
 	ps_swap(stack_a);
 	my_print(stack_a);
@@ -40,13 +41,27 @@ int	main(int argc, char **argv)
 	my_print(stack_a);
 	printf("stack_a = %p\n", stack_a);
 	my_print(stack_a);
-	ps_push(&stack_a, &stack_b);	
+	*/
+	// TEST PUSH
+	stack_b = ps_push(&stack_a, stack_b);
 	printf("stack_b = %p\n", stack_b);
 	my_print(stack_b);
-	ps_push(&stack_a, &stack_b);	
+	printf("stack_a = %p\n", stack_a);
+	my_print(stack_a);
+	stack_b = ps_push(&stack_a, stack_b);
+	printf("stack_b = %p\n", stack_b);
 	my_print(stack_b);
+	printf("stack_a = %p\n", stack_a);
+	my_print(stack_a);
+	stack_b = ps_push(&stack_a, stack_b);
+	printf("stack_b = %p\n", stack_b);
+	my_print(stack_b);
+	printf("stack_a = %p\n", stack_a);
+	my_print(stack_a);
 
+	
 	ps_clear(stack_a);
+	ps_clear(stack_b);
 	write(1, "Success\n", 6);
 	return (0);
 }

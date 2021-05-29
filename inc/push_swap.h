@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/26 04:50:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/29 09:31:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,15 @@ void	ps_set_tail(t_pswap *head, t_pswap *tail);
 /*
 ** MOVES
 */
-void	ps_push(t_pswap **from, t_pswap **to);
 void	ps_rotate(t_pswap *list);
 void	ps_swap(t_pswap *list);
 void	ps_reverse(t_pswap *list);
+
+/*
+** TESTING
+*/
+
+t_pswap *ps_push(t_pswap **src, t_pswap *dest);
 /*
 **	UTILS
 */
