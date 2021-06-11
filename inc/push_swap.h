@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/29 09:31:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/11 15:18:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_pswap *ps_push(t_pswap **src, t_pswap *dest);
 /*
 **	UTILS
 */
+int		*ps_set_presort(t_pswap *stack_a);
 int		ps_error(t_pswap *list);
 void	ps_clear(t_pswap *list);
 void	my_print(t_pswap *list);
