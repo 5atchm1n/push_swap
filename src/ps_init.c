@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/11 17:37:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/15 13:40:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_pswap	*ps_set_head(t_pswap *list, char *head)
 {
 	list = malloc(sizeof(t_pswap));
 	list->head = list;
+	list->index = 0;
 	list->n = ft_atoi(head);
 	list->next = NULL;
 	list->prev = NULL;
@@ -33,6 +34,7 @@ t_pswap *ps_init_stack_a(int n, char **stack)
 	while (i < n)
 	{
 		list->next = malloc(sizeof(t_pswap));
+		list->next->index = i - 1;
 		list->next->head = list->head;
 		list->next->n = ft_atoi(stack[i]);
 		list->next->next = NULL;
@@ -76,10 +78,11 @@ static int *ps_find_pivots(int *list, int size)
 
 	i = 0;
 	n = size / 50 - 1;
-	if (i <= 0)
+	if (n <= 0)
 	{
 		keys = malloc(sizeof(int));
 		keys[0] = list[size / 2];
+		free(list);
 		return (keys);
 	}
 	keys = malloc(sizeof(int) * n);
@@ -103,6 +106,7 @@ int *ps_set_presort(t_pswap *a)
 	temp = a;
 	i = 0;
 	size = 1;
+	list = NULL;
 	while (temp->next != NULL)
 	{
 		size++;

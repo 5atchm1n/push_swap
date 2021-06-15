@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:11:30 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/29 11:51:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:57:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 static t_pswap	*ps_new_head(t_pswap *list)
 {
 	t_pswap	*temp;
+	int	i;
 
 	temp = list;
+	i = 0;
 	while (temp != NULL)
 	{
 		temp->head = list;
+		temp->index = i;
 		temp = temp->next;
+		i++;
 	}
 	return (list->head);
 }
@@ -28,12 +32,16 @@ static t_pswap	*ps_new_head(t_pswap *list)
 void	ps_set_tail(t_pswap *head, t_pswap *tail)
 {
 	t_pswap	*temp;
+	int	i;
 
+	i = 1;
 	temp = head;
 	while (temp != NULL)
 	{
 		temp->tail = tail;
+		temp->index = i;
 		temp = temp->next;
+		i++;
 	}
 }
 
@@ -71,5 +79,6 @@ t_pswap *ps_push(t_pswap **src, t_pswap *dest)
 	temp = (*src)->head;
 	*src = ps_new_head((*src)->next);
 	free(temp);
+	write(2, "pa\n", 3);
 	return (dest->head);
 }

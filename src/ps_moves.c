@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:04:26 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/26 03:55:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/15 15:02:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ps_swap(t_pswap *list)
 		list->next->n = n;
 	}
 	list = list->head;
+	write(2, "sa\n", 3);
 }
 
 void	ps_rotate(t_pswap *list)
@@ -39,6 +40,7 @@ void	ps_rotate(t_pswap *list)
 		list->n = n;
 	}
 	list = list->head;
+	write(2, "ra\n", 3);
 }
 
 void	ps_reverse(t_pswap *list)

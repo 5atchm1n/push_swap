@@ -4,6 +4,7 @@ INC = push_swap.h
 
 SRCS = push_swap.c \
 	   ps_init.c \
+	   ps_sort.c \
 	   ps_utils.c \
 	   ps_set_stack.c \
 	   ps_moves.c
