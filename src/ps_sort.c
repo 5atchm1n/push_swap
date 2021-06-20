@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 11:01:34 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/15 15:57:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 12:11:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	sort_small(t_pswap *a, t_pswap *b)
 	int	index;
 	
 	min = ps_min(a, &index);
-	printf("index = %d, min = %d\n", index, min);
+//	printf("index = %d, min = %d\n", index, min);
 	min = ps_min(b, &index);
-	printf("index = %d, min = %d\n", index, min);
+//	printf("index = %d, min = %d\n", index, min);
 	max = ps_max(a, &index);
-	printf("index = %d, max = %d\n", index, max);
+//	printf("index = %d, max = %d\n", index, max);
 	max = ps_max(b, &index);
-	printf("index = %d, max = %d\n", index, max);
+//	printf("index = %d, max = %d\n", index, max);
 }
 
 

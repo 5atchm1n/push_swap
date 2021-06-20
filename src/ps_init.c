@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/15 13:40:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 13:11:17 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_pswap *ps_init_stack_a(int n, char **stack)
 		list = list->next;
 		i++;
 	}
-	ps_set_tail(list->head, list);
+	ps_set_tail(list->head);
 	return (list->head);
 }
 
@@ -77,19 +77,15 @@ static int *ps_find_pivots(int *list, int size)
 	int *keys;
 
 	i = 0;
-	n = size / 50 - 1;
-	if (n <= 0)
-	{
-		keys = malloc(sizeof(int));
-		keys[0] = list[size / 2];
-		free(list);
-		return (keys);
-	}
+	n = ps_npivots(size);
+	if (n == 0)
+		return (NULL);
 	keys = malloc(sizeof(int) * n);
-	while (n > 0)
+	if (keys == NULL)
+		return (NULL);
+	while (i < n)
 	{
-		keys[i] = list[n * 50];
-		n--;
+		keys[i] = list[(int)(i * (size / n))];
 		i++;
 	}
 	free(list);
@@ -100,19 +96,13 @@ int *ps_set_presort(t_pswap *a)
 {
 	int		size;
 	int		*list;
-	t_pswap *temp;
 	int		i;
 
-	temp = a;
 	i = 0;
-	size = 1;
-	list = NULL;
-	while (temp->next != NULL)
-	{
-		size++;
-		temp = temp->next;
-	}
+	size = ps_size(a);
 	list = malloc(sizeof(int) * size);
+	if (list == NULL)
+		return (NULL);
 	while (i < size)
 	{
 		list[i] = a->n;

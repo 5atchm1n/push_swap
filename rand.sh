@@ -3,8 +3,10 @@
 # $RANDOM returns a different random integer at each invocation.
 # Nominal range: 0 - 32767 (signed 16-bit integer).
 
-MAXCOUNT=100
 count=1
+
+echo  "Enter number"
+read MAXCOUNT
 
 while [ "$count" -le $MAXCOUNT ]      # Generate 10 ($MAXCOUNT) random integers.
 do

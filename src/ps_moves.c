@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:04:26 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/15 15:02:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 12:12:17 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ps_swap(t_pswap *list)
+void	ps_swap(t_pswap *list, char stack)
 {
 	int	n;
 
@@ -23,10 +23,13 @@ void	ps_swap(t_pswap *list)
 		list->next->n = n;
 	}
 	list = list->head;
-	write(2, "sa\n", 3);
+	if (stack == 'a')
+		write(1, "sa\n", 3);
+	if (stack == 'b')
+		write(1, "sb\n", 3);
 }
 
-void	ps_rotate(t_pswap *list)
+void	ps_rotate(t_pswap *list, char stack)
 {
 	int	n;
 	n = list->n;
@@ -40,10 +43,13 @@ void	ps_rotate(t_pswap *list)
 		list->n = n;
 	}
 	list = list->head;
-	write(2, "ra\n", 3);
+	if (stack == 'a')
+		write(1, "ra\n", 3);
+	if (stack == 'b')
+		write(1, "rb\n", 3);
 }
 
-void	ps_reverse(t_pswap *list)
+void	ps_reverse(t_pswap *list, char stack)
 {
 	int	n;
 	t_pswap *tail;
@@ -56,4 +62,9 @@ void	ps_reverse(t_pswap *list)
 		tail = tail->prev;
 	}
 	list->n = n;
+	list = list->head;
+	if (stack == 'a')
+		write(1, "rra\n", 4);
+	if (stack == 'b')
+		write(1, "rrb\n", 4);
 }
