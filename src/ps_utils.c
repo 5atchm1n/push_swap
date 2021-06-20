@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 13:54:17 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 14:08:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ps_npivots(int size)
+int	ps_npivots(int size)
 {
 	int	n;
-	
+
 	n = 0;
 	if (size < 10)
 		return (n);
@@ -54,8 +54,8 @@ int	ps_islower(t_pswap *list, int key)
 
 void	ps_clear(t_pswap *list)
 {
-	t_pswap *temp;
-	t_pswap *next;
+	t_pswap	*temp;
+	t_pswap	*next;
 
 	if (list == NULL)
 		return ;

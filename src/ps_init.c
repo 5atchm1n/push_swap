@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 13:11:17 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 14:05:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static t_pswap	*ps_set_head(t_pswap *list, char *head)
 	return (list);
 }
 
-t_pswap *ps_init_stack_a(int n, char **stack)
+t_pswap	*ps_init_stack_a(int n, char **stack)
 {
-	t_pswap *list;
+	t_pswap	*list;
 	int		i;
 
 	list = NULL;
@@ -70,11 +70,11 @@ static void	ps_presort_list(int *list, int size)
 	}
 }
 
-static int *ps_find_pivots(int *list, int size)
+static int	*ps_find_pivots(int *list, int size)
 {
-	int n;
-	int i;
-	int *keys;
+	int	n;
+	int	i;
+	int	*keys;
 
 	i = 0;
 	n = ps_npivots(size);
@@ -92,7 +92,7 @@ static int *ps_find_pivots(int *list, int size)
 	return (keys);
 }
 
-int *ps_set_presort(t_pswap *a)
+int	*ps_set_presort(t_pswap *a)
 {
 	int		size;
 	int		*list;

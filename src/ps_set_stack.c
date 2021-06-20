@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:11:30 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 12:12:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 14:08:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_pswap	*ps_new_head(t_pswap *list)
 {
+	int		i;
 	t_pswap	*temp;
-	int	i;
 
 	temp = list;
 	if (list == NULL)
@@ -35,8 +35,7 @@ void	ps_set_tail(t_pswap *head)
 {
 	t_pswap	*temp;
 	t_pswap	*tail;
-
-	int	i;
+	int		i;
 
 	i = 1;
 	temp = head;
@@ -55,8 +54,8 @@ void	ps_set_tail(t_pswap *head)
 
 static		t_pswap	*ps_head(t_pswap **src, t_pswap *dest, char stack)
 {
-	t_pswap *temp;
-	
+	t_pswap	*temp;
+
 	temp = (*src)->head;
 	dest = malloc(sizeof(t_pswap));
 	dest->head = dest;
@@ -74,14 +73,14 @@ static		t_pswap	*ps_head(t_pswap **src, t_pswap *dest, char stack)
 	return (dest);
 }
 
-t_pswap *ps_push(t_pswap **src, t_pswap *dest, char stack)
+t_pswap	*ps_push(t_pswap **src, t_pswap *dest, char stack)
 {
-	t_pswap *temp;
+	t_pswap	*temp;
 
 	if (*src == NULL)
 		return (dest);
 	if (dest == NULL)
-		return(ps_head(src, dest, stack));
+		return (ps_head(src, dest, stack));
 	dest->prev = malloc(sizeof(t_pswap));
 	dest->prev->n = (*src)->n;
 	dest->prev->next = dest;

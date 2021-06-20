@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 11:01:34 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 13:52:56 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 14:09:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ps_min(t_pswap *a, int *index)
 {
-	int min;
+	int	min;
 
 	if (a == NULL)
 		return (0);
@@ -33,7 +33,7 @@ int	ps_min(t_pswap *a, int *index)
 
 int	ps_max(t_pswap *a, int *index)
 {
-	int max;
+	int	max;
 
 	if (a == NULL)
 		return (0);
