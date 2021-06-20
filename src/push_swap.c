@@ -6,11 +6,35 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 17:39:46 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 23:11:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void ps_sort_pivots(t_pswap **stack_a, t_pswap **stack_b)
+{
+	int	size;
+
+	size = ps_size(*stack_a);
+	// PRE SORT STACK && FIND PIVOTS
+	int i;
+	int	*list_a;
+
+	list_a = ps_set_pivots(*stack_a);	
+	i = 0;
+	// SEND TO STACK_B
+	while (i <= ps_npivots(size))
+	{
+		if ((*stack_a)->head->n < list_a[i])
+			*stack_b = ps_push(stack_a, *stack_b, 'b');
+		else
+			ps_rotate(*stack_a, 'a');
+		if (ps_islower(*stack_a, list_a[i]) == 0)
+			i++;
+	}
+	free(list_a);
+}
 
 int	main(int argc, char **argv)
 {
@@ -27,13 +51,14 @@ int	main(int argc, char **argv)
 		return (0);
 	// SET STACK A
 	stack_a = ps_init_stack_a(argc, argv);
-	size = ps_size(stack_a);
 	// PRE SORT STACK && FIND PIVOTS
+	/*
 	int i;
 	int	*list_a;
 
-	list_a = ps_set_pivots(stack_a);	
 	i = 0;
+	list_a = ps_set_pivots(stack_a);	
+	size = ps_size(stack_a);
 	// SEND TO STACK_B
 	while (i <= ps_npivots(size))
 	{
@@ -44,6 +69,9 @@ int	main(int argc, char **argv)
 		if (ps_islower(stack_a, list_a[i]) == 0)
 			i++;
 	}
+	free(list_a);
+	*/
+	ps_sort_pivots(&stack_a, &stack_b);
 	// SEND LAST CHUNCK
 	int max;
 	int index;
@@ -74,7 +102,6 @@ int	main(int argc, char **argv)
 				ps_reverse(stack_b, 'b');
 		stack_a = ps_push(&stack_b, stack_a, 'a');
 	}
-	free(list_a);
 	//my_print(stack_a, stack_b);
 	ps_clear(stack_a);
 	ps_clear(stack_b);
