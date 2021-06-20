@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 13:58:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 17:39:46 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	int i;
 	int	*list_a;
 
-	list_a = ps_set_presort(stack_a);	
+	list_a = ps_set_pivots(stack_a);	
 	i = 0;
 	// SEND TO STACK_B
 	while (i <= ps_npivots(size))
@@ -75,6 +75,7 @@ int	main(int argc, char **argv)
 		stack_a = ps_push(&stack_b, stack_a, 'a');
 	}
 	free(list_a);
+	//my_print(stack_a, stack_b);
 	ps_clear(stack_a);
 	ps_clear(stack_b);
 	return (0);

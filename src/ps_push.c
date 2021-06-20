@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_set_stack.c                                     :+:      :+:    :+:   */
+/*   ps_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:11:30 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 14:08:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 17:49:28 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_pswap	*ps_new_head(t_pswap *list)
+static t_pswap	*ps_set_head(t_pswap *list)
 {
 	int		i;
 	t_pswap	*temp;
@@ -31,28 +31,7 @@ static t_pswap	*ps_new_head(t_pswap *list)
 	return (list->head);
 }
 
-void	ps_set_tail(t_pswap *head)
-{
-	t_pswap	*temp;
-	t_pswap	*tail;
-	int		i;
-
-	i = 1;
-	temp = head;
-	while (temp->next != NULL)
-		temp = temp->next;
-	tail = temp;
-	temp = head;
-	while (temp != NULL)
-	{
-		temp->tail = tail;
-		temp->index = i;
-		temp = temp->next;
-		i++;
-	}
-}
-
-static		t_pswap	*ps_head(t_pswap **src, t_pswap *dest, char stack)
+static t_pswap	*ps_head(t_pswap **src, t_pswap *dest, char stack)
 {
 	t_pswap	*temp;
 
@@ -64,7 +43,7 @@ static		t_pswap	*ps_head(t_pswap **src, t_pswap *dest, char stack)
 	dest->n = (*src)->head->n;
 	dest->next = NULL;
 	dest->prev = NULL;
-	*src = ps_new_head((*src)->next);
+	*src = ps_set_head((*src)->next);
 	free(temp);
 	if (stack == 'a')
 		write(1, "pa\n", 3);
@@ -85,11 +64,11 @@ t_pswap	*ps_push(t_pswap **src, t_pswap *dest, char stack)
 	dest->prev->n = (*src)->n;
 	dest->prev->next = dest;
 	dest->prev->prev = NULL;
-	dest = ps_new_head(dest->prev);
+	dest = ps_set_head(dest->prev);
 	ps_set_tail(dest);
 	dest->head->n = (*src)->n;
 	temp = (*src)->head;
-	*src = ps_new_head((*src)->next);
+	*src = ps_set_head((*src)->next);
 	free(temp);
 	if (stack == 'a')
 		write(1, "pa\n", 3);

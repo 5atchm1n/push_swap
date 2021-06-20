@@ -4,9 +4,10 @@ INC = push_swap.h
 
 SRCS = push_swap.c \
 	   ps_init.c \
-	   ps_sort.c \
+	   ps_presort.c \
+	   ps_myprint.c \
 	   ps_utils.c \
-	   ps_set_stack.c \
+	   ps_push.c \
 	   ps_moves.c
 
 LIBFT = -L./inc/libft -lft

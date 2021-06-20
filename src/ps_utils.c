@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 14:08:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/20 17:36:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,44 @@ int	ps_islower(t_pswap *list, int key)
 		list = list->next;
 	}
 	return (0);
+}
+
+int	ps_min(t_pswap *a, int *index)
+{
+	int	min;
+
+	if (a == NULL)
+		return (0);
+	min = a->n;
+	while (a)
+	{
+		if (a->n < min)
+		{
+			min = a->n;
+			*index = a->index;
+		}
+		a = a->next;
+	}
+	return (min);
+}
+
+int	ps_max(t_pswap *a, int *index)
+{
+	int	max;
+
+	if (a == NULL)
+		return (0);
+	max = a->n;
+	while (a)
+	{
+		if (a->n > max)
+		{
+			max = a->n;
+			*index = a->index;
+		}
+		a = a->next;
+	}
+	return (max);
 }
 
 void	ps_clear(t_pswap *list)
