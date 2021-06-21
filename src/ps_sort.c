@@ -6,11 +6,40 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:51:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 23:29:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/21 03:47:31 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	ps_next(t_pswap *stack_a, int pivot)
+{
+	int	i;
+	int	j;
+	t_pswap *temp;
+
+	i = 0;
+	j = 0;
+	temp = stack_a->head;
+	while (temp != NULL)
+	{
+		if (temp->n < pivot)
+			break ;
+		i++;
+		temp = temp->next;
+	}
+	temp = stack_a->tail;
+	while (temp != NULL)
+	{
+		if (temp->n < pivot)
+			break ;
+		j++;
+		temp = temp->prev;
+	}
+	if (i < j)
+		return (1);
+	return (0);
+}
 
 void	ps_sort_pivots(t_pswap **stack_a, t_pswap **stack_b)
 {
@@ -25,8 +54,10 @@ void	ps_sort_pivots(t_pswap **stack_a, t_pswap **stack_b)
 	{
 		if ((*stack_a)->head->n < list_a[i])
 			*stack_b = ps_push(stack_a, *stack_b, 'b');
-		else
+		else if (ps_next(*stack_a, list_a[i]))
 			ps_rotate(*stack_a, 'a');
+		else
+			ps_reverse(*stack_a, 'a');
 		if (ps_islower(*stack_a, list_a[i]) == 0)
 			i++;
 	}

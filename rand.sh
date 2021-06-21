@@ -5,8 +5,7 @@
 
 count=1
 
-echo  "Enter number"
-read MAXCOUNT
+MAXCOUNT=100
 
 while [ "$count" -le $MAXCOUNT ]      # Generate 10 ($MAXCOUNT) random integers.
 do

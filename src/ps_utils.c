@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 17:36:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/21 03:46:03 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ps_npivots(int size)
 	if (size >= 80 && size < 200)
 		n = 4;
 	if (size >= 200)
-		n = size / 50;
+		n = size / 45;
 	return (n);
 }
 
