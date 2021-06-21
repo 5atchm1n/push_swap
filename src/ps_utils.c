@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/21 03:46:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:17:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	ps_npivots(int size)
 	int	n;
 
 	n = 0;
-	if (size < 10)
-		return (n);
-	if (size >= 10 && size < 80)
-		n = 3;
+	if (size >= 5 && size < 30)
+		n = 1;
+	if (size >= 30 && size < 80)
+		n = 2;
 	if (size >= 80 && size < 200)
-		n = 4;
+		n = 5;
 	if (size >= 200)
-		n = size / 45;
+		n = size / 50;
 	return (n);
 }
 

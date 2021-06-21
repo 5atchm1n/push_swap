@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 11:01:34 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 17:42:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:32:28 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static int	*ps_find_pivots(int *list, int size)
 		return (NULL);
 	while (i < n)
 	{
-		keys[i] = list[(int)(i * (size / n))];
+		if (n == 1)
+			keys[i] = list[(int)(size / 2)];
+		else
+			keys[i] = list[(int)(i * (size / n))];
 		i++;
 	}
 	free(list);

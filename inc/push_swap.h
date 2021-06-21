@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 23:26:17 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:43:34 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ps_pivot_sort(t_pswap **stack_a, t_pswap **stack_b);
 /*
 **	UTILS
 */
+int		ps_next(t_pswap *stack_a, int pivot);
 int		*ps_set_pivots(t_pswap *stack_a);
 int		ps_error(t_pswap *list);
 void	ps_clear(t_pswap *list);

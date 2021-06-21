@@ -6,17 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:51:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/21 03:47:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:48:18 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ps_next(t_pswap *stack_a, int pivot)
+int	ps_next(t_pswap *stack_a, int pivot)
 {
-	int	i;
-	int	j;
-	t_pswap *temp;
+	int		i;
+	int		j;
+	t_pswap	*temp;
 
 	i = 0;
 	j = 0;
@@ -91,6 +91,7 @@ void	ps_pivot_sort(t_pswap **stack_a, t_pswap **stack_b)
 	int	index;
 	int	size;
 
+	index = 0;
 	while (ps_size(*stack_b) > 0)
 	{
 		size = ps_size(*stack_b);
