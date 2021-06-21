@@ -2,7 +2,7 @@
 
 MAXCOUNT=10
 
-count=1
+count=0
 avg=0
 echo "3 stack -- running 10 tests"
 while [ "$count" -le $MAXCOUNT ]
@@ -16,7 +16,7 @@ done
 
 # AVERAGE MOVES FOR 100 stacks
 MAXCOUNT=100
-count=1
+count=0
 avg=0
 echo "5 stack -- running 100 tests"
 while [ "$count" -le $MAXCOUNT ]
@@ -33,7 +33,7 @@ echo $avg
 
 # AVERAGE MOVES FOR 100 stacks
 MAXCOUNT=100
-count=1
+count=0
 avg=0
 echo "100 stack -- running 100 tests"
 while [ "$count" -le $MAXCOUNT ]
@@ -49,7 +49,7 @@ echo "Average move count is :"
 echo $avg
 
 # AVERAGE MOVES FOR 500 stacks
-count=1
+count=0
 avg=0
 
 echo "500 stack -- running 100 tests"
