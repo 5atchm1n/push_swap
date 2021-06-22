@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:11:30 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 17:49:28 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/22 16:39:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_pswap	*ps_set_head(t_pswap *list)
 		temp = temp->next;
 		i++;
 	}
+	list->head->prev = NULL;
 	return (list->head);
 }
 

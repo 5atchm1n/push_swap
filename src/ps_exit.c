@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:46:27 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/22 13:55:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/22 17:18:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	ps_check_arg(char **args, int size)
 		j = 0;
 		while (args[i][j] != '\0')
 		{
-			if (!ft_isdigit(args[i][j]) && !ft_isspace(args[i][j]))
+			if (!ft_isdigit(args[i][j]) && !ft_isspace(args[i][j])
+				&& args[i][j] != '-')
+				return (0);
+			if (args[i][j] == '-' && !ft_isdigit(args[i][j + 1]))
 				return (0);
 			j++;
 		}
