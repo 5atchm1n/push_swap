@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/22 17:11:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/22 23:07:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	ps_sort_five(t_pswap **stack_a, t_pswap **stack_b)
 	{
 		if ((*stack_a)->head->n < list_a[i])
 			*stack_b = ps_push(stack_a, *stack_b, 'b');
-		else if (ps_next(*stack_a, list_a[i]))
-			ps_rotate(*stack_a, 'a');
 		else
-			ps_reverse(*stack_a, 'a');
+			ps_rotate(*stack_a, 'a');
 		if (ps_islower(*stack_a, list_a[i]) == 0)
 			i++;
 	}
@@ -76,9 +74,9 @@ static void	ps_sort(t_pswap **stack_a, t_pswap **stack_b)
 	size = ps_size(*stack_a);
 	if (size <= 3)
 		ps_sort_three(stack_a);
-	if (size > 3 && size <= 10)
+	if (size > 3 && size <= 5)
 		ps_sort_five(stack_a, stack_b);
-	if (size > 10)
+	if (size > 5)
 	{
 		ps_sort_pivots(stack_a, stack_b);
 		ps_sort_max(stack_a, stack_b);
@@ -98,8 +96,7 @@ int	main(int argc, char **argv)
 	stack_a = ps_init_stack_a(argc, argv);
 	if (stack_a == NULL)
 		return (0);
-	stack_a = ps_check(stack_a);
-	if (stack_a)
+	if (ps_check(stack_a))
 		ps_sort(&stack_a, &stack_b);
 	ps_clear(stack_a);
 	ps_clear(stack_b);
