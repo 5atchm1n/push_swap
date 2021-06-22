@@ -34,7 +34,7 @@ libft:
 	@make -s -Cinc/libft
 
 $(NAME): libft ${OBJS} 
-	@echo -n "Compiling push_swap"
+	@echo  "Compiling push_swap\c"
 	@${CC} ${CFLAGS} ${MEM} ${OBJS} -o $@ ${LIBFT}
 	@echo "\033[32m\t\t[OK]\033[0m"
 
@@ -49,13 +49,13 @@ norm:
 
 clean:
 	@make clean -s -Cinc/libft
-	@echo -n "Cleaning push_swap objects"
+	@echo  "Cleaning push_swap objects\c"
 	@rm -rf ${OBJDIR}
 	@echo "\033[32m\t[OK]\033[0m"
 
 fclean: clean
 	@make fclean -s -Cinc/libft
-	@echo -n "Removing push_swap"
+	@echo  "Removing push_swap\c"
 	@rm -rf ${NAME}
 	@echo "\033[32m\t\t[OK]\033[0m"
 

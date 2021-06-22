@@ -6,7 +6,7 @@
 #    By: sshakya <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 00:09:13 by sshakya           #+#    #+#              #
-#    Updated: 2021/05/20 05:05:12 by sshakya          ###   ########.fr        #
+#    Updated: 2021/06/22 14:19:11 by sshakya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
 all : ${NAME}
 
 $(NAME) : ${OBJS} ${GNLOBJS} ${MYFNOBJS}
-	@echo -n "Compiling libft"
+	@echo "Compiling libft\c"
 	@ar rcs $@ $?
 	@echo "\033[32m\t\t\t[OK]\033[0m"
 
@@ -88,7 +88,7 @@ $(OBJDIR)/%.o: %.c
 	@${CC} ${CFLAGS} -I./inc/ -c $< -o $@
 
 bonus:	${BONUSOBJS} ${OBJS} ${MYFNOBJS}
-		@echo -n "Compiling libft bonus"
+		@echo "Compiling libft bonus\c"
 		@ar rcs ${NAME} $?
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
@@ -103,12 +103,12 @@ so :
 	@gcc -shared -o ${SONAME} ${OBJS} ${BONUSOBJS} ${MYFNOBJS}
 
 clean :
-	@echo -n "Cleaning libft objects"
+	@echo "Cleaning libft objects\c"
 	@${RM} ${OBJDIR}
 	@echo "\033[32m\t\t[OK]\033[0m"
 
 fclean : clean
-	@echo -n "Cleaning libft"
+	@echo "Cleaning libft\c"
 	@${RM} ${NAME} ${SONAME}
 	@echo "\033[32m\t\t\t[OK]\033[0m"
 
