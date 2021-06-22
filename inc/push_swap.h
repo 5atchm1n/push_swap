@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/21 17:43:34 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/22 13:49:11 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
-# include <stdint.h>
 # include "libft/inc/libft.h"
-# include <stdio.h>
 
 typedef struct s_pswap
 {
@@ -49,6 +47,8 @@ void	ps_pivot_sort(t_pswap **stack_a, t_pswap **stack_b);
 /*
 **	UTILS
 */
+int		ps_check_arg(char **args, int size);
+t_pswap	*ps_check(t_pswap *stack);
 int		ps_next(t_pswap *stack_a, int pivot);
 int		*ps_set_pivots(t_pswap *stack_a);
 int		ps_error(t_pswap *list);

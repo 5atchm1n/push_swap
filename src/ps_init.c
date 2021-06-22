@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/20 17:46:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/22 13:55:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ t_pswap	*ps_init_stack_a(int n, char **stack)
 	int		i;
 
 	list = NULL;
+	if (ps_check_arg(stack, n) == 0)
+	{
+		write(1, "Error\n", 6);
+		return (NULL);
+	}
 	list = ps_head(list, stack[1]);
 	i = 2;
 	while (i < n)
