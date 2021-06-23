@@ -11,7 +11,7 @@ SRCS = push_swap.c \
 	   ps_push.c \
 	   ps_moves.c
 
-LIBFT = -L./inc/libft -lft
+LIBFT = ./inc/libft/libft.a
 
 SRCDIR = src
 OBJDIR = objs
@@ -30,17 +30,17 @@ DEP = ${OBJS:.o=.d}
 
 all: ${NAME}
 
-libft:
-	@make -s -Cinc/libft
+${LIBFT}:
+	@make -s -C inc/libft
 
-$(NAME): libft ${OBJS} 
+$(NAME): ${LIBFT} ${OBJS} 
 	@echo  "Compiling push_swap\c"
-	@${CC} ${CFLAGS} ${MEM} ${OBJS} -o $@ ${LIBFT}
+	${CC} ${CFLAGS} ${MEM} ${OBJS} ${LIBFT} -o $@
 	@echo "\033[32m\t\t[OK]\033[0m"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p ${@D}
-	@${CC} ${CFLAGS} -I./inc -c $< -o $@
+	${CC} ${CFLAGS} -I./inc -c $< -o $@
 
 re: fclean all
 
@@ -59,6 +59,6 @@ fclean: clean
 	@rm -rf ${NAME}
 	@echo "\033[32m\t\t[OK]\033[0m"
 
-.PHONY : all clean re fclean norm
+.PHONY : all clean re fclean norm libft
 
 -include ${DEP}
