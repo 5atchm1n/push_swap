@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/23 01:55:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/23 21:57:40 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ static void	ps_sort(t_pswap **stack_a, t_pswap **stack_b)
 	int	size;
 
 	size = ps_size(*stack_a);
-	if (size == 3)
+	if (size <= 3)
 		ps_sort_three(stack_a);
-	if (size == 5)
+	else if (size <= 5)
 		ps_sort_five(stack_a, stack_b);
-	if (size > 5 || size == 4)
+	else if (size > 5)
 	{
 		ps_sort_pivots(stack_a, stack_b);
 		ps_sort_max(stack_a, stack_b);

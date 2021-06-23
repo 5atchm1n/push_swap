@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/22 23:08:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/23 21:13:44 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
-# include "libft/inc/libft.h"
+# include <stdlib.h>
 
 typedef struct s_pswap
 {
@@ -58,6 +58,7 @@ int		ps_min(t_pswap *list, int *index);
 int		ps_islower(t_pswap *list, int key);
 int		ps_size(t_pswap *a);
 int		ps_npivots(int size);
+int		ps_isdigit(int c);
 /*
 ** DEBUG
 */

@@ -11,8 +11,6 @@ SRCS = push_swap.c \
 	   ps_push.c \
 	   ps_moves.c
 
-LIBFT = ./inc/libft/libft.a
-
 SRCDIR = src
 OBJDIR = objs
 INCDIR = inc
@@ -30,13 +28,8 @@ DEP = ${OBJS:.o=.d}
 
 all: ${NAME}
 
-${LIBFT}:
-	@make -s -C inc/libft
-
-$(NAME): ${LIBFT} ${OBJS} 
-	@echo  "Compiling push_swap\c"
-	${CC} ${CFLAGS} ${MEM} ${OBJS} ${LIBFT} -o $@
-	@echo "\033[32m\t\t[OK]\033[0m"
+$(NAME): ${OBJS} 
+	${CC} ${CFLAGS} ${MEM} ${OBJS} -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p ${@D}
@@ -48,17 +41,15 @@ norm:
 	norminette ${NORM}
 
 clean:
-	@make clean -s -Cinc/libft
 	@echo  "Cleaning push_swap objects\c"
 	@rm -rf ${OBJDIR}
 	@echo "\033[32m\t[OK]\033[0m"
 
 fclean: clean
-	@make fclean -s -Cinc/libft
 	@echo  "Removing push_swap\c"
 	@rm -rf ${NAME}
 	@echo "\033[32m\t\t[OK]\033[0m"
 
-.PHONY : all clean re fclean norm libft
+.PHONY : all clean re fclean norm
 
 -include ${DEP}

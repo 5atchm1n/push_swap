@@ -6,11 +6,18 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:46:27 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/22 23:08:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/23 22:03:26 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ps_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
 
 int	ps_check_arg(char **args, int size)
 {
@@ -23,10 +30,9 @@ int	ps_check_arg(char **args, int size)
 		j = 0;
 		while (args[i][j] != '\0')
 		{
-			if (!ft_isdigit(args[i][j]) && !ft_isspace(args[i][j])
-				&& args[i][j] != '-')
+			if (!ps_isdigit(args[i][j]) && args[i][j] != '-')
 				return (0);
-			if (args[i][j] == '-' && !ft_isdigit(args[i][j + 1]))
+			if (args[i][j] == '-' && !ps_isdigit(args[i][j + 1]))
 				return (0);
 			j++;
 		}
