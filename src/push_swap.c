@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/23 21:57:40 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/24 01:53:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ps_sort_five(t_pswap **stack_a, t_pswap **stack_b)
 	i = 0;
 	while (i < ps_npivots(size) && ps_size(*stack_a) > 3)
 	{
+		if ((*stack_a)->head->n > (*stack_a)->next->n && size == 4)
+			ps_swap(*stack_a, 'a');
 		if ((*stack_a)->head->n < list_a[i])
 			*stack_b = ps_push(stack_a, *stack_b, 'b');
 		else
@@ -74,7 +76,7 @@ static void	ps_sort(t_pswap **stack_a, t_pswap **stack_b)
 	size = ps_size(*stack_a);
 	if (size <= 3)
 		ps_sort_three(stack_a);
-	else if (size <= 5)
+	if (size <= 5 && size > 3)
 		ps_sort_five(stack_a, stack_b);
 	else if (size > 5)
 	{
