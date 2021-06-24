@@ -6,15 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 15:44:16 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 17:33:09 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-double ps_atoi(const char *str)
+double	ps_atoi(const char *str)
 {
-	int	sign;
+	int		sign;
 	double	num;
 
 	sign = 1;
