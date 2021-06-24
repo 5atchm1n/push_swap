@@ -315,5 +315,6 @@ if [ $RES ]
 		echo "checker => $green OK ! $reset"
 fi
 rm test.out
+rm $CHECKER
 
 echo ;
