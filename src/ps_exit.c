@@ -6,11 +6,20 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:46:27 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 14:35:15 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 15:44:06 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	ps_limit(double num)
+{
+	if (num > 2147483647)
+		return (0);
+	if (num < -2147483648)
+		return (0);
+	return (1);
+}
 
 int	ps_isdigit(int c)
 {
@@ -23,10 +32,14 @@ int	ps_check_arg(char **args, int size)
 {
 	int	i;
 	int	j;
+	double	n;
 
 	i = 1;
 	while (i < size)
 	{
+		n = ps_atoi(args[i]);
+		if (!ps_limit(n))
+			return (0);
 		if (args[i][0] == '\0')
 			return (0);
 		j = 0;
@@ -81,11 +94,4 @@ void	ps_clear(t_pswap *list)
 		temp = next;
 	}
 	list = NULL;
-}
-
-int	ps_error(t_pswap *list)
-{
-	ps_clear(list);
-	write(1, "Error\n", 6);
-	return (1);
 }

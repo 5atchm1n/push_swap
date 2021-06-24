@@ -59,6 +59,12 @@ fi
 
 ###############################################
 
+# BASIC ERROR CHECKS
+
+
+
+
+
 # CHECK ALL SIZES FROM 1 - 100
 NTESTS=100
 count=1

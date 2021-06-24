@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/23 21:13:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/24 15:44:16 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ps_atoi(const char *str)
+double ps_atoi(const char *str)
 {
 	int	sign;
-	int	num;
+	double	num;
 
 	sign = 1;
 	num = 0;
@@ -41,7 +41,7 @@ static t_pswap	*ps_head(t_pswap *list, char *head)
 	list = malloc(sizeof(t_pswap));
 	list->head = list;
 	list->index = 0;
-	list->n = ps_atoi(head);
+	list->n = (int)ps_atoi(head);
 	list->next = NULL;
 	list->prev = NULL;
 	return (list);
@@ -86,7 +86,7 @@ t_pswap	*ps_init_stack_a(int n, char **stack)
 		list->next = malloc(sizeof(t_pswap));
 		list->next->index = i - 1;
 		list->next->head = list->head;
-		list->next->n = ps_atoi(stack[i]);
+		list->next->n = (int)ps_atoi(stack[i]);
 		list->next->next = NULL;
 		list->next->prev = list;
 		list = list->next;

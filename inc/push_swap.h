@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/23 21:13:44 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/24 15:44:52 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 typedef struct s_pswap
 {
@@ -59,6 +60,7 @@ int		ps_islower(t_pswap *list, int key);
 int		ps_size(t_pswap *a);
 int		ps_npivots(int size);
 int		ps_isdigit(int c);
+double	ps_atoi(const char *str);
 /*
 ** DEBUG
 */
