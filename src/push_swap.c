@@ -6,25 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 18:05:20 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 18:41:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	ps_issorted(t_pswap *stack)
-{
-	t_pswap	*temp;
-
-	temp = stack;
-	while (temp->next != NULL)
-	{
-		if (temp->n > temp->next->n)
-			return (0);
-		temp = temp->next;
-	}
-	return (1);
-}
 
 static void	ps_sort_three(t_pswap **stack_a)
 {
@@ -44,14 +30,21 @@ static void	ps_sort_three(t_pswap **stack_a)
 	}
 }
 
-void	ps_sort_four(t_pswap *stack_a)
+void	ps_sort_four(t_pswap **stack_a, t_pswap **stack_b)
 {
-	while (ps_issorted(stack_a) == 0)
-	{
-		if (stack_a->n > stack_a->next->n)
-			ps_swap(stack_a, 'a');
-		ps_rotate(stack_a, 'a');
-	}
+	int	min;
+	int	index;
+
+	min = ps_min(*stack_a, &index);
+	if (index > 2)
+		while ((*stack_a)->n != min)
+			ps_reverse(*stack_a, 'a');
+	else
+		while ((*stack_a)->n != min)
+			ps_rotate(*stack_a, 'a');
+	*stack_b = ps_push(stack_a, *stack_b, 'b');
+	ps_sort_three(stack_a);
+	*stack_a = ps_push(stack_b, *stack_a, 'a');
 }
 
 void	ps_sort_five(t_pswap **stack_a, t_pswap **stack_b)
@@ -89,7 +82,7 @@ static void	ps_sort(t_pswap **stack_a, t_pswap **stack_b)
 	if (size <= 3)
 		ps_sort_three(stack_a);
 	if (size <= 4)
-		ps_sort_four(*stack_a);
+		ps_sort_four(stack_a, stack_b);
 	if (size == 5)
 		ps_sort_five(stack_a, stack_b);
 	else if (size > 5)

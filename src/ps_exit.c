@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:46:27 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 15:44:06 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 18:41:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	ps_isdigit(int c)
 
 int	ps_check_arg(char **args, int size)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	double	n;
 
 	i = 1;

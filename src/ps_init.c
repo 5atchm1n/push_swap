@@ -6,11 +6,25 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 17:33:09 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 18:41:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ps_issorted(t_pswap *stack)
+{
+	t_pswap	*temp;
+
+	temp = stack;
+	while (temp->next != NULL)
+	{
+		if (temp->n > temp->next->n)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
+}
 
 double	ps_atoi(const char *str)
 {

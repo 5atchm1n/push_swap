@@ -71,7 +71,7 @@ fi
 
 
 echo "${lblue} ERROR TESTS $reset"
-
+echo ;
 echo -ne "${blue} Test : sorted list $reset"
 ./push_swap 1 >> test.out
 ./push_swap 1 2 >> test.out
@@ -93,8 +93,8 @@ rm test.out
 echo -ne "${blue} Test : Empty args $reset"
 ./push_swap "" >> test.out
 ./push_swap "" 1 2 3 >> test.out
-RES=`grep "Error\n" test.out`
-if [ $RES ]
+RES=`grep "Error" test.out`
+if [[ ! $RES ]]
 	then
 		echo "$red KO $reset"
 	else
@@ -104,8 +104,8 @@ fi
 rm test.out
 echo -ne "${blue} Test : Empty Duplicated args $reset"
 ./push_swap "1" 1 2 3 >> test.out
-RES=`grep "Error\n" test.out`
-if [ $RES ]
+RES=`grep "Error" test.out`
+if [[ ! $RES ]]
 	then
 		echo "$red KO $reset"
 	else
@@ -116,8 +116,8 @@ rm test.out
 echo -ne "${blue} Test : Overflow int $reset"
 ./push_swap -2147483649 >> test.out
 ./push_swap 2147483648 >> test.out
-RES=`grep "Error\n" test.out`
-if [ $RES ]
+RES=`grep "Error" test.out`
+if [[ ! $RES ]]
 	then
 		echo "$red KO $reset"
 	else
@@ -128,8 +128,8 @@ rm test.out
 echo -ne "${blue} Test : whitespace in arg $reset"
 ./push_swap " 1" 2 3 >> test.out
 ./push_swap 42  "   43" >> test.out
-RES=`grep "Error\n" test.out`
-if [ $RES ]
+RES=`grep "Error" test.out`
+if [[ ! $RES ]]
 	then
 		echo "$red KO $reset"
 	else
@@ -141,8 +141,8 @@ echo -ne "${blue} Test : invalid char in arg $reset"
 ./push_swap 0 1 2 3 "--1" >> test.out
 ./push_swap 0 1 2 3 "&" >> test.out
 
-RES=`grep "Error\n" test.out`
-if [ $RES ]
+RES=`grep "Error" test.out`
+if [[ ! $RES ]]
 	then
 		echo "$red KO $reset"
 	else
@@ -155,7 +155,7 @@ rm test.out
 NTESTS=100
 count=1
 avg=0
-
+echo ;
 touch test.out
 echo "${lblue} RUNNING TESTS $reset"
 echo -ne "${blue}size 1 - ${NTESTS} stacks\t $reset"
@@ -194,7 +194,7 @@ if [ $RES ]
 fi
 
 rm test.out
-
+echo ;
 NTESTS=5
 
 count=0
@@ -211,7 +211,7 @@ do
 done
 
 # SIZE 5
-
+echo ;
 NTESTS=15
 count=1
 avg=0
@@ -252,7 +252,7 @@ fi
 rm test.out
 
 # MOVES FOR 100 stacks
-
+echo ;
 NTESTS=100
 count=1
 avg=0
@@ -294,7 +294,7 @@ fi
 rm test.out
 
 # AVERAGE MOVES FOR 500 stacks
-
+echo ;
 count=1
 avg=0
 MAX=0
