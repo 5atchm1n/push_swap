@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 15:47:25 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 16:24:47 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
+	if (argc == 1)
+		return (0);
 	stack_a = ps_init_stack_a(argc, argv);
 	if (stack_a == NULL)
 		return (0);
