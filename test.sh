@@ -62,8 +62,87 @@ fi
 # BASIC ERROR CHECKS
 
 
+echo "${lblue} RUNNING TESTS $reset"
+echo -ne "${blue} Error Tests $reset"
 
+echo -ne "${blue} Test : sorted list $reset"
+./push_swap 1 >> test.out
+./push_swap 1 2 >> test.out
+./push_swap 1 2 3 >> test.out
+./push_swap 1 2 3 4 >> test.out
+./push_swap 1 2 3 4 5 >> test.out
+./push_swap 1 2 3 4 5  >> test.out
+./push_swap 1 2 3 4 5 6 7 >> test.out
+./push_swap 1 2 3 4 5 6 7 8 9 >> test.out
+RES=`grep "Error\n" test.out`
+if [ $RES ]
+	then
+		echo "$red KO $reset"
+	else
+		echo "$green OK ! $reset"
+fi
 
+rm test.out
+echo -ne "${blue} Test : Empty args $reset"
+./push_swap "" >> test.out
+./push_swap "" 1 2 3 >> test.out
+RES=`grep "Error\n" test.out`
+if [ $RES ]
+	then
+		echo "$red KO $reset"
+	else
+		echo "$green OK ! $reset"
+fi
+
+rm test.out
+echo -ne "${blue} Test : Empty Duplicated args $reset"
+./push_swap "1" 1 2 3 >> test.out
+RES=`grep "Error\n" test.out`
+if [ $RES ]
+	then
+		echo "$red KO $reset"
+	else
+		echo "$green OK ! $reset"
+fi
+
+rm test.out
+echo -ne "${blue} Test : Overflow int $reset"
+./push_swap -2147483649 >> test.out
+./push_swap 2147483648 >> test.out
+RES=`grep "Error\n" test.out`
+if [ $RES ]
+	then
+		echo "$red KO $reset"
+	else
+		echo "$green OK ! $reset"
+fi
+
+rm test.out
+echo -ne "${blue} Test : whitespace in arg $reset"
+./push_swap " 1" 2 3 >> test.out
+./push_swap 42  "   43" >> test.out
+RES=`grep "Error\n" test.out`
+if [ $RES ]
+	then
+		echo "$red KO $reset"
+	else
+		echo "$green OK ! $reset"
+fi
+
+rm test.out
+echo -ne "${blue} Test : invalid char in arg $reset"
+./push_swap 0 1 2 3 "--1" >> test.out
+./push_swap 0 1 2 3 "&" >> test.out
+
+RES=`grep "Error\n" test.out`
+if [ $RES ]
+	then
+		echo "$red KO $reset"
+	else
+		echo "$green OK ! $reset"
+fi
+
+rm test.out
 
 # CHECK ALL SIZES FROM 1 - 100
 NTESTS=100
