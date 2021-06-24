@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:46:27 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/23 22:03:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:35:15 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ps_check_arg(char **args, int size)
 	i = 1;
 	while (i < size)
 	{
+		if (args[i][0] == '\0')
+			return (0);
 		j = 0;
 		while (args[i][j] != '\0')
 		{
