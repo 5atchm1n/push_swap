@@ -91,7 +91,7 @@ fi
 
 rm test.out
 
-NTESTS=10
+NTESTS=5
 
 count=0
 avg=0
@@ -108,7 +108,7 @@ done
 
 # SIZE 5
 
-NTESTS=5
+NTESTS=15
 count=1
 avg=0
 MAX=0
