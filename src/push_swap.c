@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 14:52:21 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:59:52 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	ps_sort(t_pswap **stack_a, t_pswap **stack_b)
 	int	size;
 
 	size = ps_size(*stack_a);
+	if (ps_issorted(*stack_a))
+		return ;
 	if (size <= 3)
 		ps_sort_three(stack_a);
 	if (size <= 5 && size > 3)
