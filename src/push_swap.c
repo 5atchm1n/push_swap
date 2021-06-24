@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 16:24:47 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/06/24 18:05:20 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ static void	ps_sort_three(t_pswap **stack_a)
 	}
 }
 
+void	ps_sort_four(t_pswap *stack_a)
+{
+	while (ps_issorted(stack_a) == 0)
+	{
+		if (stack_a->n > stack_a->next->n)
+			ps_swap(stack_a, 'a');
+		ps_rotate(stack_a, 'a');
+	}
+}
+
 void	ps_sort_five(t_pswap **stack_a, t_pswap **stack_b)
 {
 	int	i;
@@ -78,7 +88,9 @@ static void	ps_sort(t_pswap **stack_a, t_pswap **stack_b)
 		return ;
 	if (size <= 3)
 		ps_sort_three(stack_a);
-	if (size <= 5 && size > 3)
+	if (size <= 4)
+		ps_sort_four(*stack_a);
+	if (size == 5)
 		ps_sort_five(stack_a, stack_b);
 	else if (size > 5)
 	{

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 # ALL COLOURS FOR SCRIPT
 orange=$'\033[0;33m'
 lblue=$'\033[1;34m'
@@ -25,11 +25,19 @@ echo "${blue}                     \/     \/            \/                    "${
 echo ;
 echo "${orange}                by @sshakya for @42Paris                      "${reset};
 echo ;
+echo "${orange}   run the tester with \"-D\" as an argument for debug mode       "${reset};
+echo "${orange}   run your own tests as well !!								"${reset};
+echo ;
+echo ;
 #
 #  DEBUG 
 #
-DEBUG=0
-
+if [[ "$1" == "-D" ]]
+	then
+		DEBUG=1
+	else
+		DEBUG=0
+fi
 #
 # CHECK OS
 #
@@ -62,8 +70,7 @@ fi
 # BASIC ERROR CHECKS
 
 
-echo "${lblue} RUNNING TESTS $reset"
-echo -ne "${blue} Error Tests $reset"
+echo "${lblue} ERROR TESTS $reset"
 
 echo -ne "${blue} Test : sorted list $reset"
 ./push_swap 1 >> test.out
@@ -154,12 +161,24 @@ echo "${lblue} RUNNING TESTS $reset"
 echo -ne "${blue}size 1 - ${NTESTS} stacks\t $reset"
 while [ "$count" -le "$NTESTS" ]
 do
-	for X in '-' '/' '|' '\'; do echo -en "\b$X"; sleep 0.1; done;
+	if [ $DEBUG == 0 ]
+		then
+			for X in '-' '/' '|' '\'; do echo -en "\b$X"; sleep 0.1; done;
+	fi
 	ARG=`ruby -e "puts (0..$count).to_a.shuffle.join(' ')"`;
 	if [ $DEBUG == 1 ]
 		then	
+			echo ;
+			echo "${blue}stack size = $count ${reset}";
 			echo $ARG
-			./push_swap $ARG | ./$CHECKER $ARG
+			echo -ne "checker => "
+			RET=` ./push_swap $ARG | ./$CHECKER $ARG ; `
+			if [[ "$RET" == "OK" ]]
+				then
+					echo "$green OK $reset"
+				else
+					echo "$red FAIL $reset"
+			fi
 	fi
 	./push_swap $ARG | ./$CHECKER $ARG > test.out
 	let "count += 1"
