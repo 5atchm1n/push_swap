@@ -4,6 +4,7 @@ INC = push_swap.h
 
 SRCS = push_swap.c \
 	   ps_init.c \
+	   ps_next.c \
 	   ps_exit.c \
 	   ps_presort.c \
 	   ps_sort.c \
@@ -18,7 +19,7 @@ INCDIR = inc
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -MMD -MP
-MEM = -fsanitize=address
+#MEM = -fsanitize=address
 
 OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
 NORM = $(addprefix ${SRCDIR}/,${SRCS})
