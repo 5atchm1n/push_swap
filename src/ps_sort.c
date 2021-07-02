@@ -6,85 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:51:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/02 02:28:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/02 16:35:55 by Shakira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ps_issorted(t_stack *stack)
+static int	ps_quick_sort(t_psdata *stack)
 {
-	t_stack	*temp;
-
-	temp = stack;
-	while (temp->next != NULL)
-	{
-		if (temp->index > temp->next->index)
-			return (0);
-		temp = temp->next;
-	}
-	return (1);
-}
-
-int	ps_pivot_next(t_stack *stack_a, int pivot)
-{
-	int		i;
-	int		j;
-	t_stack	*temp;
-
-	i = 0;
-	j = 0;
-	temp = stack_a->head;
-	while (temp != NULL)
-	{
-		if (temp->index < pivot)
-			break ;
-		i++;
-		temp = temp->next;
-	}
-	temp = stack_a->tail;
-	while (temp != NULL)
-	{
-		if (temp->index < pivot)
-			break ;
-		j++;
-		temp = temp->prev;
-	}
-	if (i < j)
-		return (1);
-	return (0);
-}
-
-int	ps_sort_large(t_psdata *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < ps_npivots(stack->size))
-	{
-		if (stack->a->head->index < stack->pivots[i])
-		{
-			stack->b = ps_push(&stack->a, stack->b, 'b');
-			if (stack->b == NULL)
-				return (0);
-		}
-		else if (ps_pivot_next(stack->a, stack->pivots[i]))
-			ps_rotate(stack->a, 'a');
-		else
-			ps_reverse(stack->a, 'a');
-		if (ps_islower(stack->a, stack->pivots[i]) == 0)
-			i++;
-	}
-	return (1);
-}
-
-int	ps_sort(t_psdata *stack)
-{
-	t_moves	moves;
-	int		index;
-
 	if (stack->size > 100)
-		ps_sort_large(stack);
+		ps_pivot_sort(stack);
 	while (ps_size(stack->a) != 1 && ps_issorted(stack->a) == 0)
 	{
 		if (stack->a->index > stack->a->tail->index)
@@ -93,6 +24,13 @@ int	ps_sort(t_psdata *stack)
 		if (stack->b == NULL)
 			return (0);
 	}
+	return (1);
+}
+
+int	ps_insert_sort(t_psdata *stack)
+{
+	t_moves moves;
+
 	while (stack->b != NULL)
 	{
 		ps_set_moves(stack, &moves);
@@ -112,6 +50,17 @@ int	ps_sort(t_psdata *stack)
 		if (stack->a == NULL)
 			return (0);
 	}
+	return (1);
+}
+
+int	ps_sort(t_psdata *stack)
+{
+	int		index;
+
+	if (!ps_quick_sort(stack))
+		return (0);
+	if (!ps_insert_sort(stack))
+		return (0);
 	ps_max(stack->a, &index);
 	while (!ps_issorted(stack->a))
 	{

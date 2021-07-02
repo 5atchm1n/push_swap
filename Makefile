@@ -8,6 +8,7 @@ SRCS = push_swap.c \
 	   ps_exit.c \
 	   ps_presort.c \
 	   ps_sort.c \
+	   ps_pivot_sort.c \
 	   ps_utils.c \
 	   ps_push.c \
 	   ps_moves.c
