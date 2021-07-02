@@ -6,29 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 18:36:00 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/02 02:24:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ps_npivots(int size)
-{
-	int	n;
-
-	n = 0;
-	if (size < 30)
-		n = 1;
-	if (size >= 30 && size < 80)
-		n = 2;
-	if (size >= 80 && size < 200)
-		n = 5;
-	if (size >= 200)
-		n = size / 50;
-	return (n);
-}
-
-int	ps_size(t_pswap *a)
+int	ps_size(t_stack *a)
 {
 	int	size;
 
@@ -41,51 +25,100 @@ int	ps_size(t_pswap *a)
 	return (size);
 }
 
-int	ps_islower(t_pswap *list, int key)
+int	ps_lower(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	ps_islower(t_stack *list, int key)
 {
 	while (list != NULL)
 	{
-		if (list->n < key)
+		if (list->index < key)
 			return (1);
 		list = list->next;
 	}
 	return (0);
 }
 
-int	ps_min(t_pswap *a, int *index)
+int	ps_min(t_stack *a, int *index)
 {
 	int	min;
 
+	*index = 0;
 	if (a == NULL)
 		return (0);
-	min = a->n;
+	min = a->index;
 	while (a)
 	{
-		if (a->n < min)
+		if (a->index < min)
 		{
-			min = a->n;
-			*index = a->index;
+			min = a->index;
+			*index = a->n;
 		}
 		a = a->next;
 	}
 	return (min);
 }
 
-int	ps_max(t_pswap *a, int *index)
+int	ps_max(t_stack *a, int *index)
 {
 	int	max;
 
+	*index = 0;
 	if (a == NULL)
 		return (0);
-	max = a->n;
+	max = a->index;
 	while (a)
 	{
-		if (a->n > max)
+		if (a->index > max)
 		{
-			max = a->n;
-			*index = a->index;
+			max = a->index;
+			*index = a->n;
 		}
 		a = a->next;
 	}
 	return (max);
+}
+
+double	ps_atoi(const char *str)
+{
+	int		sign;
+	double	num;
+
+	sign = 1;
+	num = 0;
+	while (*str)
+	{
+		if (*str == '-')
+			sign = -1;
+		if (*str == '-' || *str == '+')
+			str++;
+		if (ps_isdigit(*str))
+		{
+			num = num * 10 + (*str - '0');
+			str++;
+		}
+		if (!(ps_isdigit(*str)))
+			return (num * sign);
+	}
+	return (num * sign);
+}
+
+int	ps_limit(double num)
+{
+	if (num > 2147483647)
+		return (0);
+	if (num < -2147483648)
+		return (0);
+	return (1);
+}
+
+int	ps_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }

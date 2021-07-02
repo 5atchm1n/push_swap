@@ -6,108 +6,32 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:27:54 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/24 18:41:22 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/02 02:16:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ps_sort_three(t_pswap **stack_a)
+static void	ps_init(t_psdata *stack)
 {
-	while (ps_issorted(*stack_a) == 0)
-	{
-		if ((*stack_a)->n > (*stack_a)->next->n
-			&& (*stack_a)->next->n > (*stack_a)->tail->n)
-			ps_swap(*stack_a, 'a');
-		if ((*stack_a)->head->n > (*stack_a)->tail->n
-			&& (*stack_a)->next->n > (*stack_a)->head->n)
-			ps_reverse(*stack_a, 'a');
-		if ((*stack_a)->head->n > (*stack_a)->tail->n
-			&& (*stack_a)->head->n > (*stack_a)->next->n)
-			ps_rotate(*stack_a, 'a');
-		if (ps_issorted(*stack_a) == 0)
-			ps_swap(*stack_a, 'a');
-	}
-}
-
-void	ps_sort_four(t_pswap **stack_a, t_pswap **stack_b)
-{
-	int	min;
-	int	index;
-
-	min = ps_min(*stack_a, &index);
-	if (index > 2)
-		while ((*stack_a)->n != min)
-			ps_reverse(*stack_a, 'a');
-	else
-		while ((*stack_a)->n != min)
-			ps_rotate(*stack_a, 'a');
-	*stack_b = ps_push(stack_a, *stack_b, 'b');
-	ps_sort_three(stack_a);
-	*stack_a = ps_push(stack_b, *stack_a, 'a');
-}
-
-void	ps_sort_five(t_pswap **stack_a, t_pswap **stack_b)
-{
-	int	i;
-	int	size;
-	int	*list_a;
-
-	list_a = ps_set_pivots(*stack_a);
-	size = ps_size(*stack_a);
-	i = 0;
-	while (i < ps_npivots(size) && ps_size(*stack_a) > 3)
-	{
-		if ((*stack_a)->head->n > (*stack_a)->next->n && size == 4)
-			ps_swap(*stack_a, 'a');
-		if ((*stack_a)->head->n < list_a[i])
-			*stack_b = ps_push(stack_a, *stack_b, 'b');
-		else
-			ps_rotate(*stack_a, 'a');
-		if (ps_islower(*stack_a, list_a[i]) == 0)
-			i++;
-	}
-	ps_sort_three(stack_a);
-	ps_pivot_sort(stack_a, stack_b);
-	free(list_a);
-}
-
-static void	ps_sort(t_pswap **stack_a, t_pswap **stack_b)
-{	
-	int	size;
-
-	size = ps_size(*stack_a);
-	if (ps_issorted(*stack_a))
-		return ;
-	if (size <= 3)
-		ps_sort_three(stack_a);
-	if (size <= 4)
-		ps_sort_four(stack_a, stack_b);
-	if (size == 5)
-		ps_sort_five(stack_a, stack_b);
-	else if (size > 5)
-	{
-		ps_sort_pivots(stack_a, stack_b);
-		ps_sort_max(stack_a, stack_b);
-		ps_pivot_sort(stack_a, stack_b);
-	}
+	stack->a = NULL;
+	stack->b = NULL;
+	stack->list = NULL;
+	stack->pivots = NULL;
+	stack->size = 0;
 }
 
 int	main(int argc, char **argv)
 {
-	t_pswap	*stack_a;
-	t_pswap	*stack_b;
+	t_psdata	stack;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	if (argc == 1)
-		return (0);
-	stack_a = ps_init_stack_a(argc, argv);
-	if (stack_a == NULL)
-		return (0);
-	if (ps_check(stack_a))
-		ps_sort(&stack_a, &stack_b);
-	ps_clear(stack_a);
-	ps_clear(stack_b);
+	ps_init(&stack);
+	if (ps_check_arg(argv, argc) == 0)
+		return (ps_error(stack));
+	if (ps_set(argc, argv, &stack) == 0)
+		return (ps_error(stack));
+	if (!ps_sort(&stack))
+		return (ps_error(stack));
+	ps_clear(stack);
 	return (0);
 }

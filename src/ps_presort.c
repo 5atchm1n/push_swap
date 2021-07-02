@@ -6,13 +6,24 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 11:01:34 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/21 17:32:28 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/02 00:15:03 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ps_presort_list(int *list, int size)
+int	ps_npivots(int size)
+{
+	if (size < 100)
+		return (0);
+	if (size < 200)
+		return (1);
+	if (size >= 200)
+		return (size / 150);
+	return (0);
+}
+
+static void	ps_bubble_sort(int *list, int size)
 {
 	int		i;
 	int		j;
@@ -36,7 +47,7 @@ static void	ps_presort_list(int *list, int size)
 	}
 }
 
-static int	*ps_find_pivots(int *list, int size)
+int	*ps_pivots(int *list, int size)
 {
 	int	n;
 	int	i;
@@ -57,11 +68,10 @@ static int	*ps_find_pivots(int *list, int size)
 			keys[i] = list[(int)(i * (size / n))];
 		i++;
 	}
-	free(list);
 	return (keys);
 }
 
-int	*ps_set_pivots(t_pswap *a)
+int	*ps_presort(t_stack *a)
 {
 	int		size;
 	int		*list;
@@ -78,7 +88,6 @@ int	*ps_set_pivots(t_pswap *a)
 		a = a->next;
 		i++;
 	}
-	ps_presort_list(list, size);
-	list = ps_find_pivots(list, size);
+	ps_bubble_sort(list, size);
 	return (list);
 }

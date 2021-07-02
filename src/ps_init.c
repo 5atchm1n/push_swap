@@ -6,65 +6,48 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:18:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/28 13:17:00 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/02 02:15:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ps_issorted(t_pswap *stack)
+void	ps_set_index(int *list, t_stack *stack, int size)
 {
-	t_pswap	*temp;
+	int	n;
 
-	temp = stack;
-	while (temp->next != NULL)
+	while (stack != NULL)
 	{
-		if (temp->n > temp->next->n)
-			return (0);
-		temp = temp->next;
-	}
-	return (1);
-}
-
-double	ps_atoi(const char *str)
-{
-	int		sign;
-	double	num;
-
-	sign = 1;
-	num = 0;
-	while (*str)
-	{
-		if (*str == '-')
-			sign = -1;
-		if (*str == '-' || *str == '+')
-			str++;
-		if (ps_isdigit(*str))
+		n = size;
+		while (n > -1)
 		{
-			num = num * 10 + (*str - '0');
-			str++;
+			if (list[n] == stack->n)
+				stack->index = n;
+			n--;
 		}
-		if (!(ps_isdigit(*str)))
-			return (num * sign);
+		stack = stack->next;
 	}
-	return (num * sign);
 }
 
-static t_pswap	*ps_head(t_pswap *list, char *head)
+static t_stack	*ps_head(char *head)
 {
-	list = malloc(sizeof(t_pswap));
-	list->head = list;
-	list->index = 0;
-	list->n = (int)ps_atoi(head);
-	list->next = NULL;
-	list->prev = NULL;
-	return (list);
+	t_stack	*stack;
+
+	stack = malloc(sizeof(t_stack));
+	if (stack == NULL)
+		return (NULL);
+	stack->head = stack;
+	stack->index = 0;
+	stack->n = (int)ps_atoi(head);
+	stack->next = NULL;
+	stack->prev = NULL;
+	return (stack);
 }
 
-void	ps_set_tail(t_pswap *head)
+void	ps_set_tail(t_stack *head)
 {
-	t_pswap	*temp;
-	t_pswap	*tail;
+	t_stack	*temp;
+	t_stack	*tail;
 	int		i;
 
 	i = 1;
@@ -76,36 +59,52 @@ void	ps_set_tail(t_pswap *head)
 	while (temp != NULL)
 	{
 		temp->tail = tail;
-		temp->index = i;
 		temp = temp->next;
 		i++;
 	}
 }
 
-t_pswap	*ps_init_stack_a(int n, char **stack)
+static t_stack	*ps_set_stack(int n, char **args)
 {
-	t_pswap	*list;
+	t_stack	*stack;
 	int		i;
 
-	list = NULL;
-	if (ps_check_arg(stack, n) == 0)
-	{
-		write(1, "Error\n", 6);
+	stack = ps_head(args[1]);
+	if (stack == NULL)
 		return (NULL);
-	}
-	list = ps_head(list, stack[1]);
 	i = 2;
 	while (i < n)
 	{
-		list->next = malloc(sizeof(t_pswap));
-		list->next->index = i - 1;
-		list->next->head = list->head;
-		list->next->n = (int)ps_atoi(stack[i]);
-		list->next->next = NULL;
-		list->next->prev = list;
-		list = list->next;
+		stack->next = malloc(sizeof(t_stack));
+		if (stack->next == NULL)
+			return (ps_clear_stack(stack->head));
+		stack->next->index = 0;
+		stack->next->in_a = 0;
+		stack->next->head = stack->head;
+		stack->next->n = (int)ps_atoi(args[i]);
+		stack->next->next = NULL;
+		stack->next->prev = stack;
+		stack = stack->next;
 		i++;
 	}
-	ps_set_tail(list->head);
-	return (list->head);
+	ps_set_tail(stack->head);
+	return (stack->head);
+}
+
+int	ps_set(int argc, char **args, t_psdata *stack)
+{
+	stack->a = ps_set_stack(argc, args);
+	if (stack->a == NULL)
+		return (0);
+	if (!ps_check(stack->a))
+		return (0);
+	stack->size = ps_size(stack->a);
+	stack->list = ps_presort(stack->a);
+	if (stack->list == NULL)
+		return (0);
+	stack->pivots = ps_pivots(stack->list, stack->size);
+	if (stack->list == NULL)
+		return (0);
+	ps_set_index(stack->list, stack->a, stack->size);
+	return (1);
 }

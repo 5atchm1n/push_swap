@@ -6,24 +6,38 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:51:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/06/23 00:02:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/02 02:28:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ps_next(t_pswap *stack_a, int pivot)
+int	ps_issorted(t_stack *stack)
+{
+	t_stack	*temp;
+
+	temp = stack;
+	while (temp->next != NULL)
+	{
+		if (temp->index > temp->next->index)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
+}
+
+int	ps_pivot_next(t_stack *stack_a, int pivot)
 {
 	int		i;
 	int		j;
-	t_pswap	*temp;
+	t_stack	*temp;
 
 	i = 0;
 	j = 0;
 	temp = stack_a->head;
 	while (temp != NULL)
 	{
-		if (temp->n < pivot)
+		if (temp->index < pivot)
 			break ;
 		i++;
 		temp = temp->next;
@@ -31,7 +45,7 @@ int	ps_next(t_pswap *stack_a, int pivot)
 	temp = stack_a->tail;
 	while (temp != NULL)
 	{
-		if (temp->n < pivot)
+		if (temp->index < pivot)
 			break ;
 		j++;
 		temp = temp->prev;
@@ -41,67 +55,70 @@ int	ps_next(t_pswap *stack_a, int pivot)
 	return (0);
 }
 
-void	ps_sort_pivots(t_pswap **stack_a, t_pswap **stack_b)
+int	ps_sort_large(t_psdata *stack)
 {
 	int	i;
-	int	size;
-	int	*list_a;
 
-	list_a = ps_set_pivots(*stack_a);
-	size = ps_size(*stack_a);
 	i = 0;
-	while (i < ps_npivots(size))
+	while (i < ps_npivots(stack->size))
 	{
-		if ((*stack_a)->head->n < list_a[i])
-			*stack_b = ps_push(stack_a, *stack_b, 'b');
-		else if (ps_next(*stack_a, list_a[i]))
-			ps_rotate(*stack_a, 'a');
+		if (stack->a->head->index < stack->pivots[i])
+		{
+			stack->b = ps_push(&stack->a, stack->b, 'b');
+			if (stack->b == NULL)
+				return (0);
+		}
+		else if (ps_pivot_next(stack->a, stack->pivots[i]))
+			ps_rotate(stack->a, 'a');
 		else
-			ps_reverse(*stack_a, 'a');
-		if (ps_islower(*stack_a, list_a[i]) == 0)
+			ps_reverse(stack->a, 'a');
+		if (ps_islower(stack->a, stack->pivots[i]) == 0)
 			i++;
 	}
-	free(list_a);
+	return (1);
 }
 
-void	ps_sort_max(t_pswap **stack_a, t_pswap **stack_b)
+int	ps_sort(t_psdata *stack)
 {
-	int	max;
-	int	index;
-	int	size;
+	t_moves	moves;
+	int		index;
 
-	max = ps_max(*stack_a, &index);
-	size = ps_size(*stack_a);
-	while (size > 1)
+	if (stack->size > 100)
+		ps_sort_large(stack);
+	while (ps_size(stack->a) != 1 && ps_issorted(stack->a) == 0)
 	{
-		if (index < size / 2)
-			while ((*stack_a)->tail->n != max)
-				ps_rotate(*stack_a, 'a');
-		else
-			while ((*stack_a)->tail->n != max)
-				ps_reverse(*stack_a, 'a');
-		*stack_b = ps_push(stack_a, *stack_b, 'b');
-		size = ps_size(*stack_a);
+		if (stack->a->index > stack->a->tail->index)
+			ps_rotate(stack->a, 'a');
+		stack->b = ps_push(&stack->a, stack->b, 'b');
+		if (stack->b == NULL)
+			return (0);
 	}
-}
-
-void	ps_pivot_sort(t_pswap **stack_a, t_pswap **stack_b)
-{
-	int	max;
-	int	index;
-	int	size;
-
-	index = 0;
-	while (ps_size(*stack_b) > 0)
+	while (stack->b != NULL)
 	{
-		size = ps_size(*stack_b);
-		max = ps_max(*stack_b, &index);
-		if (index < size / 2)
-			while ((*stack_b)->head->n != max)
-				ps_rotate(*stack_b, 'b');
-		else
-			while ((*stack_b)->head->n != max)
-				ps_reverse(*stack_b, 'b');
-		*stack_a = ps_push(stack_b, *stack_a, 'a');
+		ps_set_moves(stack, &moves);
+		while (moves.rr-- > 0)
+			ps_rotate_r(stack, 'r');
+		while (moves.rrr-- > 0)
+			ps_reverse_r(stack, 'r');
+		while (moves.ra-- > 0)
+			ps_rotate(stack->a, 'a');
+		while (moves.rb-- > 0)
+			ps_rotate(stack->b, 'b');
+		while (moves.rra-- > 0)
+			ps_reverse(stack->a, 'a');
+		while (moves.rrb-- > 0)
+			ps_reverse(stack->b, 'b');
+		stack->a = ps_push(&stack->b, stack->a, 'a');
+		if (stack->a == NULL)
+			return (0);
 	}
+	ps_max(stack->a, &index);
+	while (!ps_issorted(stack->a))
+	{
+		if (index < stack->size / 2)
+			ps_rotate(stack->a, 'a');
+		else
+			ps_reverse(stack->a, 'a');
+	}
+	return (1);
 }
