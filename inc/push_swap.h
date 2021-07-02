@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 20:51:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/02 17:53:30 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/07/02 19:35:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ typedef struct s_stack
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }					t_stack;
+
+typedef struct	s_vars
+{
+	int	max;
+	int	max_id;
+	int	min;
+	int	min_id;
+	int	pos;
+}	t_vars;
 
 /*
 ** INIT

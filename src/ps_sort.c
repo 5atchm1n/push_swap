@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:51:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/02 16:35:55 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/07/02 18:49:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ps_quick_sort(t_psdata *stack)
 
 int	ps_insert_sort(t_psdata *stack)
 {
-	t_moves moves;
+	t_moves	moves;
 
 	while (stack->b != NULL)
 	{

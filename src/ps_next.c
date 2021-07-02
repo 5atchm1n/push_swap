@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 11:23:51 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/02 02:20:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/02 19:43:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,26 @@
 static void	ps_pos(t_stack *a, t_stack *b)
 {
 	t_stack	*head;
-	int		pos;
-	int		lim[2];
-	int		index[2];
+	t_vars	vars;
 
-	lim[1] = ps_max(a, &index[1]);
-	lim[0] = ps_min(a, &index[0]);
+	vars.max = ps_max(a, &vars.max_id);
+	vars.min = ps_min(a, &vars.min_id);
 	head = a;
 	while (b)
 	{
-		pos = 1;
+		vars.pos = 1;
 		a = head;
 		while (a != NULL)
 		{
-			if (b->index > lim[1])
-				b->in_a = index[1] + 1;
-			if (b->index < lim[0])
-				b->in_a = index[0];
+			if (b->index > vars.max)
+				b->in_a = vars.max_id + 1;
+			if (b->index < vars.min)
+				b->in_a = vars.min_id;
 			if (a->next && b->index > a->index && b->index < a->next->index)
-				b->in_a = pos;
+				b->in_a = vars.pos;
 			if (!a->next && b->index > a->index && b->index < a->head->index)
 				b->in_a = 0;
-			pos++;
+			vars.pos++;
 			a = a->next;
 		}
 		b = b->next;
