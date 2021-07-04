@@ -6,12 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 22:19:07 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/04 23:56:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/05 00:10:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-#include <stdio.h>
 
 static void	ps_init(t_psdata *stack)
 {
