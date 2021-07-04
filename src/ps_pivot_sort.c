@@ -6,11 +6,22 @@
 /*   By: Shakira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 16:21:54 by Shakira           #+#    #+#             */
-/*   Updated: 2021/07/02 17:53:35 by Shakira          ###   ########.fr       */
+/*   Updated: 2021/07/03 20:51:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ps_islower(t_stack *list, int key)
+{
+	while (list != NULL)
+	{
+		if (list->index < key)
+			return (1);
+		list = list->next;
+	}
+	return (0);
+}
 
 static int	ps_pivot_next(t_stack *stack_a, int pivot)
 {
@@ -46,7 +57,7 @@ int	ps_pivot_sort(t_psdata *stack)
 	int	i;
 
 	i = 0;
-	while (i < ps_npivots(stack->size))
+	while (i < ps_npivots(stack->size) - 1)
 	{
 		if (stack->a->head->index < stack->pivots[i])
 		{

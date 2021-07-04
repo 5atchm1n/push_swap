@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 11:01:34 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/02 00:15:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/03 19:41:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ps_npivots(int size)
 	if (size < 200)
 		return (1);
 	if (size >= 200)
-		return (size / 150);
+		return ((size / 150));
 	return (0);
 }
 
@@ -62,10 +62,10 @@ int	*ps_pivots(int *list, int size)
 		return (NULL);
 	while (i < n)
 	{
-		if (n == 1)
+		if (n <= 1)
 			keys[i] = list[(int)(size / 2)];
 		else
-			keys[i] = list[(int)(i * (size / n))];
+			keys[i] = list[(int)((i + 1) * (size / n))];
 		i++;
 	}
 	return (keys);

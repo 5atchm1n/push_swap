@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:51:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/02 18:49:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/03 19:18:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,24 @@ int	ps_sort(t_psdata *stack)
 {
 	int		index;
 
-	if (!ps_quick_sort(stack))
-		return (0);
-	if (!ps_insert_sort(stack))
-		return (0);
-	ps_max(stack->a, &index);
-	while (!ps_issorted(stack->a))
+	if (ps_issorted(stack->a))
+		return (1);
+	if (stack->size <= 5)
+		ps_sort_small(stack);
+	if (stack->size > 5)
 	{
-		if (index < stack->size / 2)
-			ps_rotate(stack->a, 'a');
-		else
-			ps_reverse(stack->a, 'a');
+		if (!ps_quick_sort(stack))
+			return (0);
+		if (!ps_insert_sort(stack))
+			return (0);
+		ps_max(stack->a, &index);
+		while (!ps_issorted(stack->a))
+		{
+			if (index < stack->size / 2)
+				ps_rotate(stack->a, 'a');
+			else
+				ps_reverse(stack->a, 'a');
+		}
 	}
 	return (1);
 }

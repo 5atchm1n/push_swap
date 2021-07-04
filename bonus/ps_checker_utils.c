@@ -6,50 +6,23 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 03:42:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/04 23:49:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/04 01:14:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-int	ps_min(t_stack *a, int *index)
+int	ps_size(t_stack *a)
 {
-	int	min;
+	int	size;
 
-	*index = 0;
-	if (a == NULL)
-		return (0);
-	min = a->index;
-	while (a)
+	size = 0;
+	while (a != NULL)
 	{
-		if (a->index < min)
-		{
-			min = a->index;
-			*index = a->n;
-		}
+		size++;
 		a = a->next;
 	}
-	return (min);
-}
-
-int	ps_max(t_stack *a, int *index)
-{
-	int	max;
-
-	*index = 0;
-	if (a == NULL)
-		return (0);
-	max = a->index;
-	while (a)
-	{
-		if (a->index > max)
-		{
-			max = a->index;
-			*index = a->n;
-		}
-		a = a->next;
-	}
-	return (max);
+	return (size);
 }
 
 double	ps_atoi(const char *str)
@@ -76,6 +49,22 @@ double	ps_atoi(const char *str)
 	return (num * sign);
 }
 
+int	ps_limit(double num)
+{
+	if (num > 2147483647)
+		return (0);
+	if (num < -2147483648)
+		return (0);
+	return (1);
+}
+
+int	ps_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
+
 int	ps_issorted(t_stack *stack)
 {
 	t_stack	*temp;
@@ -88,23 +77,4 @@ int	ps_issorted(t_stack *stack)
 		temp = temp->next;
 	}
 	return (1);
-}
-
-int	ps_find_best(t_stack *stack)
-{
-	int		n;
-	int		tot;
-
-	n = stack->index;
-	tot = stack->tot;
-	while (stack)
-	{
-		if (tot > stack->tot)
-		{
-			n = stack->index;
-			tot = stack->tot;
-		}
-		stack = stack->next;
-	}
-	return (n);
 }

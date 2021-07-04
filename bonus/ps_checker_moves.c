@@ -6,94 +6,66 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:04:26 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/04 23:39:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/04 01:16:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-void	ps_swap(t_stack *list, char stack)
+void	ps_swap(t_stack *list)
 {
-	int	n;
 	int	i;
 
-	n = list->n;
+	list = list->head;
 	i = list->index;
 	if (list->next != NULL)
 	{
-		list->n = list->next->n;
 		list->index = list->next->index;
-		list->next->n = n;
 		list->next->index = i;
 	}
-	list = list->head;
-	if (stack == 'a')
-		write(1, "sa\n", 3);
-	if (stack == 'b')
-		write(1, "sb\n", 3);
 }
 
-void	ps_rotate(t_stack *list, char stack)
+void	ps_rotate(t_stack *list)
 {
-	int	n;
 	int	i;
 
-	n = list->n;
 	i = list->index;
 	if (list->next != NULL)
 	{
 		while (list->next != NULL)
 		{
-			list->n = list->next->n;
 			list->index = list->next->index;
 			list = list->next;
 		}
-		list->n = n;
 		list->index = i;
 	}
 	list = list->head;
-	if (stack == 'a')
-		write(1, "ra\n", 3);
-	if (stack == 'b')
-		write(1, "rb\n", 3);
 }
 
-void	ps_rotate_r(t_psdata *stack, char ch)
+void	ps_rotate_r(t_psdata *stack)
 {
-	ps_rotate(stack->a, 'c');
-	ps_rotate(stack->b, 'c');
-	if (ch == 'r')
-		write(1, "rr\n", 3);
+	ps_rotate(stack->a);
+	ps_rotate(stack->b);
 }
 
-void	ps_reverse(t_stack *list, char stack)
+void	ps_reverse(t_stack *list)
 {
-	int		n;
 	int		i;
 	t_stack	*tail;
 
-	n = list->tail->n;
 	i = list->tail->index;
 	tail = list->tail;
 	while (tail->prev != NULL)
 	{
-		tail->n = tail->prev->n;
 		tail->index = tail->prev->index;
 		tail = tail->prev;
 	}
-	list->n = n;
 	list->index = i;
 	list = list->head;
-	if (stack == 'a')
-		write(1, "rra\n", 4);
-	if (stack == 'b')
-		write(1, "rrb\n", 4);
 }
 
-void	ps_reverse_r(t_psdata *stack, char ch)
+void	ps_reverse_r(t_psdata *stack)
 {
-	ps_reverse(stack->a, 'c');
-	ps_reverse(stack->b, 'c');
-	if (ch == 'r')
-		write(1, "rrr\n", 4);
+	ps_reverse(stack->a);
+	ps_reverse(stack->b);
 }

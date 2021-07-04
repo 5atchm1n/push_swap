@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 11:23:51 by sshakya           #+#    #+#             */
-/*   Updated: 2021/07/02 19:43:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/07/03 10:57:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,32 @@ static void	ps_pos(t_stack *a, t_stack *b)
 	}
 }
 
+static void	ps_rotate_dir(t_stack *b, int size_a, int size_b)
+{
+	if (b->n <= size_b / 2)
+	{
+		b->moves.rb = b->n;
+		b->moves.rrb = 0;
+	}
+	else
+	{
+		b->moves.rrb = size_b % b->n;
+		b->moves.rb = 0;
+	}
+	if (b->in_a <= size_a / 2)
+	{
+		b->moves.ra = b->in_a;
+		b->moves.rra = 0;
+	}
+	else
+	{
+		b->moves.rra = size_a % b->in_a;
+		b->moves.ra = 0;
+	}
+	b->moves.rr = 0;
+	b->moves.rrr = 0;
+}
+
 static void	ps_count_moves(t_stack *b, t_stack *a)
 {
 	int	size_a;
@@ -50,28 +76,7 @@ static void	ps_count_moves(t_stack *b, t_stack *a)
 	size_b = ps_size(b);
 	while (b)
 	{
-		if (b->n <= size_b / 2)
-		{
-			b->moves.rb = b->n;
-			b->moves.rrb = 0;
-		}
-		else
-		{
-			b->moves.rrb = size_b % b->n;
-			b->moves.rb = 0;
-		}
-		if (b->in_a <= size_a / 2)
-		{
-			b->moves.ra = b->in_a;
-			b->moves.rra = 0;
-		}
-		else
-		{
-			b->moves.rra = size_a % b->in_a;
-			b->moves.ra = 0;
-		}
-		b->moves.rr = 0;
-		b->moves.rrr = 0;
+		ps_rotate_dir(b, size_a, size_b);
 		b = b->next;
 	}
 }
@@ -98,25 +103,6 @@ static void	ps_optimize(t_stack *b)
 			+ b->moves.rb + b->moves.rra + b->moves.rrb;
 		b = b->next;
 	}
-}
-
-static int	ps_find_best(t_stack *stack)
-{
-	int		n;
-	int		tot;
-
-	n = stack->index;
-	tot = stack->tot;
-	while (stack)
-	{
-		if (tot > stack->tot)
-		{
-			n = stack->index;
-			tot = stack->tot;
-		}
-		stack = stack->next;
-	}
-	return (n);
 }
 
 void	ps_set_moves(t_psdata *stack, t_moves *moves)
